@@ -6,7 +6,9 @@ import utils.readFile
 fun main() {
     val lines = readFile("src/main/kotlin/day7/data.txt")
 
+    val startTime = System.currentTimeMillis()
     val result = lines
+        .parallelStream()
         .map {
             val (result, allValues) = it.split(":")
             val values = allValues.substring(1).split(" ").map { it.toLong() }
@@ -29,7 +31,7 @@ fun main() {
         .map { it.first }
         .reduce { acc, result -> acc + result }
 
-    println("result: $result")
+    println("result: $result; Time: ${System.currentTimeMillis() - startTime}")
 }
 
 private const val operators = "*+|"
